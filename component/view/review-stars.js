@@ -20,6 +20,6 @@ export default class ReviewStars extends Component {
 const styles = StyleSheet.create({
     stars: {
         color: '#ffd700',
-        fontSize: 32
+        fontSize: 32,
     }
 });
