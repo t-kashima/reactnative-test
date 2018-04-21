@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
-import ReviewStars from './component/review-stars';
+import BookScreen from './component/screen/book-screen';
 
 export default class App extends Component {
   render() {
@@ -14,10 +14,9 @@ export default class App extends Component {
           }}
           title="Press"
         />  */}
-
-        <ReviewStars count="3" />
+        <BookScreen />
       </View>
-    );
+    )
   }
 }
 
