@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView } from 'react-native';
 import ReviewStars from '../view/review-stars';
-import RegisterBookButton from '../view/register-book-button'
+import RegisterBookButton from '../view/register-book-button';
 import Moment from 'moment';
+import NavigationBar from 'react-native-navbar';
 
 const styles = StyleSheet.create({
     scroll: {
@@ -31,12 +32,49 @@ const styles = StyleSheet.create({
     item: {
         marginTop: 8, 
         marginBottom: 8,
+    },
+    section: {
+        marginTop: 16, 
+        marginBottom: 16,
+    },
+    navigationBar: {
+        height: 80,
+        backgroundColor: '#864815',
+    },
+    shadow: {
+        height: 1,
+        width: '100%',
+        backgroundColor: '#c0c0c0'
     }
 });
+
+const titleConfig = {
+    title: '本の紹介',
+    style: {color: '#fff', fontSize: 24, alignItems: 'center', marginTop: 16}
+};
+
+const statusBarConfig = {
+    style: {backgroundColor: '#864815'},
+    tintColor: '#864815'
+}
+
+const rightButtonConfig = {
+    title: 'Next',
+    style: {marginTop: 16},
+    handler: () => alert('hello!'),
+};
 
 export default class BookScreen extends Component {
     constructor(props) {
         super(props)
+        this.state = {isRegistered: false};
+    }
+
+    onClickRegisterBook = () => {
+        this.setState((previousState) => {
+            return {isRegistered: !previousState.isRegistered};
+        });
+        
     }
 
     render() {
@@ -49,6 +87,15 @@ export default class BookScreen extends Component {
             read_at: Date()
         }
         return (
+            <View style={{flex: 1, width: '100%', backgroundColor: '#864815'}}>
+                <NavigationBar
+                    title={titleConfig}
+                    rightButton={rightButtonConfig}
+                    style={styles.navigationBar}
+                    statusBar={statusBarConfig}
+                />
+                <View
+                    style={styles.shadow} />
                 <ScrollView style={styles.scroll}>
                     <View style={styles.container}>
                         <Image 
@@ -57,10 +104,10 @@ export default class BookScreen extends Component {
                         />
                         <View style={styles.detail}>
                             <Text style={{fontSize: 21}}>{book.title}</Text>
-                            <Text style={[styles.item, {fontSize: 18}]}>{book.author}</Text>                            
-                            <ReviewStars count="4" />  
-                            <RegisterBookButton isRegistered={true} style={styles.item} />                          
-                            <Text style={styles.item}>ISBN13 {book.isbn}</Text>
+                            <Text style={[{fontSize: 18, marginTop: 16, marginBottom: 24}]}>{book.author}</Text>                            
+                            <RegisterBookButton isRegistered={this.state.isRegistered} onClick={this.onClickRegisterBook} style={{marginTop: 24, marginBottom: 24}} />                                      
+                            {/* <ReviewStars count="4" style={{marginTop: 32, marginBottom: 16}} />                   */}
+                            <Text style={{marginTop: 32, marginBottom: 8}}>ISBN13 {book.isbn}</Text>
                             <Text style={styles.item}>
                                 {book.publisher} / {Moment(book.released_at.toISOString).format('YYYY年MM月DD日発売')}
                             </Text>   
@@ -70,6 +117,7 @@ export default class BookScreen extends Component {
                         </View>
                     </View>
                 </ScrollView>
-        )
+            </View>
+        );
     }
 }

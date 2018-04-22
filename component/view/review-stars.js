@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default class ReviewStars extends Component {
     constructor(props) {
@@ -8,16 +8,21 @@ export default class ReviewStars extends Component {
 
     render() {
         return (
-            <Text style={styles.stars}>
-                {Array.from(Array(5).keys()).map((index) =>
-                    ((index + 1) <= this.props.count) ? "★" : "☆"
-                )}
-            </Text>
+            <View style={styles.container}>
+                <Text style={styles.stars}>
+                    {Array.from(Array(5).keys()).map((index) =>
+                        ((index + 1) <= this.props.count) ? "★" : "☆"
+                    )}
+                </Text>
+            </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
     stars: {
         color: '#ffd700',
         fontSize: 32,
