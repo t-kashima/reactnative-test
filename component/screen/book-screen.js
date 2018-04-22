@@ -59,7 +59,7 @@ export default class BookScreen extends Component {
                             <Text style={{fontSize: 21}}>{book.title}</Text>
                             <Text style={[styles.item, {fontSize: 18}]}>{book.author}</Text>                            
                             <ReviewStars count="4" />  
-                            <RegisterBookButton style={styles.item} />                          
+                            <RegisterBookButton isRegistered={true} style={styles.item} />                          
                             <Text style={styles.item}>ISBN13 {book.isbn}</Text>
                             <Text style={styles.item}>
                                 {book.publisher} / {Moment(book.released_at.toISOString).format('YYYY年MM月DD日発売')}
